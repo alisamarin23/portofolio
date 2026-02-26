@@ -1,1 +1,855 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VetPet — Case Study · Marin Alisa Daiana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,700&family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sand:   #FAFAF7;
+  --sand2:  #F2EDE5;
+  --sand3:  #EDE5D8;
+  --navy:   #0F1B2D;
+  --navy2:  #1A2840;
+  --terra:  #C4714A;
+  --terra2: #A85C38;
+  --terra-l:#F5EBE4;
+  --orange: #FF6B1A;
+  --orange2:#E85500;
+  --orange-l:#FFF3EC;
+  --muted:  #6B7280;
+  --soft:   #9CA3AF;
+  --border: #E8E0D6;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--sand);
+  color: var(--navy);
+  font-family: 'Epilogue', sans-serif;
+  font-size: 16px; line-height: 1.65;
+  overflow-x: hidden;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9000;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 68px;
+  background: rgba(250,250,247,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; font-style: italic;
+  color: var(--navy); text-decoration: none;
+}
+.nav-logo span { color: var(--terra); }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-link {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; padding: 7px 14px; border-radius: 6px;
+  transition: all 0.2s;
+}
+.nav-link:hover { color: var(--navy); background: var(--sand2); }
+.nav-back {
+  background: var(--navy); color: var(--sand);
+  font-family: 'Epilogue', sans-serif; font-size: 13px; font-weight: 600;
+  padding: 9px 20px; border-radius: 8px; text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-back:hover { background: var(--terra); }
+
+/* ── HERO ── */
+.hero {
+  padding-top: 68px;
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+.hero-l {
+  background: var(--navy);
+  padding: 80px 60px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-l::before {
+  content: 'VP';
+  position: absolute; bottom: -60px; right: -10px;
+  font-family: 'Fraunces', serif; font-size: 300px; font-weight: 500; font-style: italic;
+  color: rgba(196,113,74,0.06); line-height: 1; pointer-events: none; user-select: none;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(196,113,74,0.12); border: 1px solid rgba(196,113,74,0.25);
+  border-radius: 99px; padding: 6px 16px;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: #E8A07A; margin-bottom: 36px; width: fit-content; position: relative; z-index: 1;
+}
+.pill-dot { width: 6px; height: 6px; background: #E8A07A; border-radius: 50%; animation: blink 2.5s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+h1.h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(60px, 7.5vw, 96px);
+  font-weight: 400; line-height: 0.92; letter-spacing: -2px;
+  position: relative; z-index: 1; margin-bottom: 32px;
+}
+.h1 .w1 { color: rgba(250,250,247,0.9); display: block; }
+.h1 .w2 { color: var(--terra); display: block; font-style: italic; }
+
+.hero-desc {
+  font-size: 15px; font-weight: 300; color: rgba(250,250,247,0.5);
+  line-height: 1.8; max-width: 420px; margin-bottom: 44px; position: relative; z-index: 1;
+}
+.hero-desc strong { color: rgba(250,250,247,0.85); font-weight: 500; }
+
+.hero-meta {
+  display: flex; gap: 0;
+  border: 1px solid rgba(250,250,247,0.08);
+  border-radius: 10px; overflow: hidden;
+  width: fit-content; position: relative; z-index: 1; margin-bottom: 44px;
+}
+.hm { padding: 18px 28px; border-right: 1px solid rgba(250,250,247,0.08); }
+.hm:last-child { border-right: none; }
+.hm-n {
+  font-family: 'Fraunces', serif; font-size: 30px; font-weight: 500; font-style: italic;
+  color: var(--terra); line-height: 1;
+}
+.hm-l {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(250,250,247,0.3); margin-top: 5px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 6px; position: relative; z-index: 1; }
+.hero-tag {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.5px;
+  color: rgba(250,250,247,0.35); border: 1px solid rgba(250,250,247,0.08);
+  border-radius: 5px; padding: 5px 12px;
+}
+
+/* Right — phone scene */
+.hero-r {
+  background: var(--sand2);
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 48px; position: relative; overflow: hidden;
+}
+.hero-r::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--sand3) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sand3) 1px, transparent 1px);
+  background-size: 44px 44px; opacity: 0.6;
+}
+.hero-r::after {
+  content: '🐾';
+  position: absolute; bottom: 24px; right: 24px;
+  font-size: 140px; opacity: 0.06; pointer-events: none;
+}
+
+.hero-phone {
+  width: 256px; position: relative; z-index: 1;
+  background: var(--sand);
+  border-radius: 34px;
+  box-shadow: 0 40px 80px rgba(15,27,45,0.18), 0 0 0 1px rgba(15,27,45,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  overflow: hidden;
+}
+.phone-notch { padding: 10px 0 3px; display: flex; justify-content: center; }
+.phone-pill { width: 68px; height: 5px; background: var(--sand3); border-radius: 99px; }
+.phone-top {
+  background: var(--orange); padding: 14px 16px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.phone-logo { font-family: 'Fraunces', serif; font-size: 13px; font-weight: 500; font-style: italic; color: white; }
+.phone-body { padding: 13px 13px 14px; }
+.phone-g { font-size: 9px; color: var(--muted); }
+.phone-nm { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: var(--navy); margin-bottom: 9px; }
+.phone-card {
+  background: white; border-radius: 11px; padding: 11px;
+  display: flex; gap: 9px; align-items: center; margin-bottom: 7px;
+  box-shadow: 0 2px 10px rgba(196,113,74,0.08);
+}
+.phone-av {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--orange), #FF9A5C);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.phone-pn { font-size: 11px; font-weight: 600; color: var(--navy); }
+.phone-ps { font-size: 9px; color: var(--muted); }
+.phone-ok {
+  font-size: 8px; background: var(--orange-l); color: var(--orange2);
+  padding: 2px 7px; border-radius: 99px; font-weight: 700;
+  display: inline-block; margin-top: 2px;
+}
+.phone-appt {
+  background: var(--orange); border-radius: 11px; padding: 11px; color: white; margin-bottom: 7px;
+}
+.phone-al { font-size: 8px; opacity: 0.7; letter-spacing: 1px; margin-bottom: 2px; }
+.phone-an { font-size: 11px; font-weight: 600; }
+.phone-ad { font-size: 9px; opacity: 0.8; margin-top: 2px; }
+.phone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.phone-btn {
+  background: white; border-radius: 9px; padding: 9px;
+  text-align: center; font-size: 9px; font-weight: 600; color: var(--muted);
+  box-shadow: 0 1px 4px rgba(196,113,74,0.06);
+}
+.phone-btn span { font-size: 15px; display: block; margin-bottom: 3px; }
+
+/* float card */
+.hero-float {
+  position: absolute; left: 36px; top: 50%; transform: translateY(-64%);
+  background: white; border-radius: 12px; padding: 16px 20px;
+  box-shadow: 0 12px 40px rgba(15,27,45,0.1), 0 0 0 1px rgba(196,113,74,0.1);
+  z-index: 2;
+}
+.hf-l { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.hf-v { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 500; font-style: italic; color: var(--terra); line-height: 1; }
+.hf-s { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+/* ── SECTIONS ── */
+.sec { padding: 96px 60px; }
+.sec.alt { background: var(--sand2); }
+.sec.dark { background: var(--navy); }
+.wrap { max-width: 1080px; margin: 0 auto; }
+
+.eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--terra); margin-bottom: 14px;
+}
+.eyebrow .bar { width: 16px; height: 1.5px; background: var(--terra); border-radius: 1px; }
+
+h2.sh {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(32px, 3.8vw, 52px);
+  font-weight: 400; font-style: italic;
+  line-height: 1.08; letter-spacing: -1px;
+  color: var(--navy); margin-bottom: 14px;
+}
+h2.sh em { color: var(--terra); font-style: normal; }
+h2.sh.light { color: rgba(250,250,247,0.92); }
+h2.sh.light em { color: #E8A07A; }
+
+.sub { font-size: 16px; color: var(--muted); font-weight: 300; line-height: 1.8; max-width: 540px; margin-bottom: 52px; }
+.sub strong { color: var(--navy); font-weight: 500; }
+
+/* ── OVERVIEW ── */
+.ov-grid { display: grid; grid-template-columns: 1fr 340px; gap: 64px; align-items: start; }
+.ov-text p { font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 18px; font-weight: 300; }
+.ov-text p strong { color: var(--navy); font-weight: 600; }
+.ov-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.ov-tag {
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  background: var(--terra-l); color: var(--terra2);
+  border-radius: 5px; padding: 6px 14px; border: 1px solid rgba(196,113,74,0.2);
+}
+.ov-tag.plain { background: white; color: var(--muted); border-color: var(--border); }
+
+.ov-cards { display: flex; flex-direction: column; gap: 10px; }
+.ov-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; }
+.ov-card-l { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+.ov-card-v { font-size: 14px; font-weight: 600; color: var(--navy); }
+.ov-card-big { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 500; font-style: italic; color: var(--terra); line-height: 1; }
+
+.tl { display: flex; margin-top: 56px; }
+.tl-s { flex: 1; padding-right: 20px; position: relative; }
+.tl-s:not(:last-child)::after { content:''; position:absolute; top:16px; right:0; width:1px; height:44px; background:var(--border); }
+.tl-dot {
+  width: 32px; height: 32px; background: var(--terra); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-size: 14px; font-weight: 500; color: white;
+  margin-bottom: 10px;
+}
+.tl-name { font-family: 'Epilogue', sans-serif; font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.tl-d { font-size: 12px; color: var(--muted); line-height: 1.5; font-weight: 300; }
+
+/* ── PROBLEM ── */
+.bq {
+  background: var(--navy); border-radius: 16px; padding: 40px 48px; margin: 52px 0;
+  position: relative; overflow: hidden;
+}
+.bq::before {
+  content: '"'; position: absolute; top: -30px; left: 28px;
+  font-family: 'Fraunces', serif; font-size: 200px; font-weight: 500; font-style: italic;
+  color: rgba(196,113,74,0.12); line-height: 1; pointer-events: none;
+}
+.bq p {
+  font-family: 'Fraunces', serif; font-size: 21px; font-weight: 400; font-style: italic;
+  color: rgba(250,250,247,0.88); line-height: 1.55; position: relative; z-index: 1;
+}
+.bq cite {
+  display: block; margin-top: 14px; font-size: 12px;
+  color: rgba(250,250,247,0.35); font-style: normal; font-family: 'DM Mono', monospace;
+  letter-spacing: 1px; position: relative; z-index: 1;
+}
+
+.prob-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.prob-c {
+  background: white; border: 1px solid var(--border); border-radius: 14px; padding: 28px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.prob-c:hover { border-color: rgba(196,113,74,0.4); transform: translateY(-4px); }
+.prob-n {
+  font-family: 'Fraunces', serif; font-size: 52px; font-weight: 400; font-style: italic;
+  color: var(--terra-l); line-height: 1; margin-bottom: 12px;
+}
+.prob-t { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.prob-d { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+/* ── RESEARCH ── */
+.res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.iq { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.iq li {
+  background: white; border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px; font-size: 14px; color: var(--muted); line-height: 1.6; font-weight: 300;
+  display: flex; gap: 12px; transition: border-color 0.2s;
+}
+.iq li:hover { border-color: rgba(196,113,74,0.35); }
+.iq li::before {
+  content: '?'; font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500;
+  color: var(--terra); flex-shrink: 0; font-style: italic;
+}
+.ins-list { display: flex; flex-direction: column; gap: 12px; }
+.ins {
+  background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+  display: flex; gap: 14px; transition: transform 0.2s;
+}
+.ins:hover { transform: translateX(4px); }
+.ins-ic {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: var(--terra-l); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.ins-t { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.ins-d { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+/* ── PERSONAS ── */
+.per-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.per { background: white; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.per-head {
+  padding: 28px;
+  background: linear-gradient(135deg, var(--terra-l), rgba(196,113,74,0.04));
+  border-bottom: 1px solid var(--border);
+}
+.per-av {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--terra), #E8A07A);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 14px;
+}
+.per-name { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; font-style: italic; color: var(--navy); }
+.per-role { font-size: 13px; color: var(--terra); font-weight: 500; margin-top: 3px; }
+.per-body { padding: 22px 28px; }
+.ps { margin-bottom: 16px; }
+.ps-l { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--soft); margin-bottom: 7px; }
+.ps-t { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+.ps-ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.ps-ul li { font-size: 13px; color: var(--muted); display: flex; gap: 8px; font-weight: 300; }
+.ok { color: #16A34A; font-weight: 700; flex-shrink: 0; }
+.no { color: var(--terra2); font-weight: 700; flex-shrink: 0; }
+.ps-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ps-tag { font-size: 11px; font-weight: 600; background: var(--terra-l); color: var(--terra2); padding: 4px 10px; border-radius: 5px; }
+
+.em-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  margin-top: 48px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+}
+.em-c { padding: 24px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.em-c:nth-child(2n) { border-right: none; }
+.em-c:nth-child(3), .em-c:nth-child(4) { border-bottom: none; }
+.em-h {
+  font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; font-style: italic;
+  color: var(--terra); margin-bottom: 12px;
+}
+.em-ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.em-ul li {
+  font-size: 13px; color: var(--muted); line-height: 1.55; font-weight: 300;
+  padding-left: 16px; position: relative;
+}
+.em-ul li::before { content: '—'; position: absolute; left: 0; color: var(--terra); opacity: 0.5; }
+
+/* ── DESIGN DECISIONS ── */
+.dec-list { display: flex; flex-direction: column; }
+.dec {
+  display: grid; grid-template-columns: 60px 1fr; gap: 28px;
+  padding: 32px 0; border-bottom: 1px solid var(--border); align-items: start;
+}
+.dec:last-child { border-bottom: none; }
+.dec-n {
+  font-family: 'Fraunces', serif; font-size: 52px; font-weight: 400; font-style: italic;
+  color: var(--terra-l); line-height: 1; text-align: right;
+}
+.dec-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.dec-d { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 12px; font-weight: 300; }
+.dec-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--terra-l); color: var(--terra2);
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+  border-radius: 5px; padding: 5px 12px;
+}
+
+/* ── SCREENS ── */
+.sg { margin-bottom: 52px; }
+.sg-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 22px; padding-bottom: 14px; border-bottom: 2px solid var(--border);
+}
+.sg-n {
+  width: 28px; height: 28px; background: var(--terra); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-size: 14px; color: white; font-weight: 500;
+}
+.sg-t { font-family: 'Epilogue', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); }
+.sg-s { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+.sc3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.sc2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+.sc-l { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+
+/* phone frame */
+.pf {
+  background: white; border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(15,27,45,0.07);
+}
+.pf-bar {
+  background: var(--sand2); padding: 9px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.pf-t { font-family: 'Fraunces', serif; font-size: 11px; font-style: italic; color: var(--muted); }
+.pf-ti { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--soft); }
+
+/* welcome */
+.sc-wb { background: var(--orange); padding: 28px 18px; text-align: center; }
+.sc-wl { font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; font-weight: 400; color: white; letter-spacing: -0.5px; margin-bottom: 3px; }
+.sc-ws { font-size: 10px; color: rgba(255,255,255,0.55); margin-bottom: 20px; letter-spacing: 1px; }
+.sc-wi { font-size: 44px; margin-bottom: 10px; }
+.sc-wt { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 400; font-style: italic; color: white; margin-bottom: 7px; }
+.sc-wd { font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.5; margin-bottom: 20px; }
+.sc-wb-btn { background: white; color: var(--orange2); font-family: 'Fraunces', serif; font-weight: 500; font-style: italic; font-size: 13px; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+.sc-wb-link { font-size: 10px; color: rgba(255,255,255,0.35); font-family: 'DM Mono', monospace; }
+
+/* home */
+.sc-home { padding: 12px; background: var(--sand); }
+.sc-top { background: var(--orange); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+.sc-greet { font-size: 9px; color: rgba(255,255,255,0.65); margin-bottom: 2px; }
+.sc-nm { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: white; margin-bottom: 10px; }
+.sc-sts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
+.sc-st { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 7px; text-align: center; }
+.sc-sv { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: white; }
+.sc-sl { font-size: 7px; color: rgba(255,255,255,0.6); }
+.sc-sec { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin: 8px 0 6px; }
+.sc-pet { background: white; border-radius: 10px; padding: 10px; display: flex; gap: 8px; align-items: center; margin-bottom: 6px; border: 1px solid var(--border); }
+.sc-av { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.sc-pn { font-size: 11px; font-weight: 600; color: var(--navy); }
+.sc-ps { font-size: 9px; color: var(--muted); }
+.badge-ok { font-size: 8px; background: var(--orange-l); color: var(--orange2); padding: 2px 6px; border-radius: 99px; font-weight: 700; display: inline-block; margin-top: 2px; }
+.badge-warn { font-size: 8px; background: #FEF9C3; color: #854D0E; padding: 2px 6px; border-radius: 99px; font-weight: 700; display: inline-block; margin-top: 2px; }
+
+/* profile */
+.sc-pt { background: var(--orange); padding: 14px; }
+.sc-pav { width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 8px auto 4px; border: 2px solid rgba(255,255,255,0.3); }
+.sc-pnm { font-family: 'Fraunces', serif; font-size: 14px; font-style: italic; color: white; text-align: center; }
+.sc-pbr { font-size: 10px; color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 10px; }
+.sc-pst { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
+.sc-psc { background: rgba(255,255,255,0.12); border-radius: 7px; padding: 7px; text-align: center; }
+.sc-psv { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 400; color: white; }
+.sc-psl { font-size: 8px; color: rgba(255,255,255,0.5); }
+.sc-pb { padding: 10px; background: var(--sand); }
+.vax-row { background: white; border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; border: 1px solid var(--border); }
+.vax-n { font-size: 11px; font-weight: 600; color: var(--navy); }
+.vax-d { font-size: 9px; color: var(--muted); }
+
+/* notifications */
+.sc-nb { background: var(--sand); padding: 10px; }
+.sc-nt-title { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: var(--navy); padding: 4px 0 10px; }
+.sc-nt { background: white; border-radius: 10px; padding: 10px; margin-bottom: 6px; display: flex; gap: 8px; border: 1px solid var(--border); }
+.sc-nt.pri { border-left: 3px solid var(--orange); }
+.sc-nt-ic { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.sc-nt-nm { font-size: 11px; font-weight: 600; color: var(--navy); }
+.sc-nt-d { font-size: 9px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+.sc-nt-time { font-size: 8px; color: var(--soft); margin-top: 3px; font-family: 'DM Mono', monospace; }
+
+/* health records */
+.sc-hr-sb { background: white; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+.sc-hr-inp { background: var(--sand2); border: 1px solid var(--border); border-radius: 7px; padding: 7px 12px; font-size: 10px; color: var(--muted); display: flex; gap: 6px; }
+.sc-hr-body { padding: 10px; background: var(--sand); }
+.sc-hr-s { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin: 8px 0 5px; }
+.sc-hr-i { background: white; border-radius: 10px; padding: 10px; margin-bottom: 5px; display: flex; gap: 8px; border: 1px solid var(--border); }
+.sc-hr-ic { font-size: 17px; flex-shrink: 0; }
+.sc-hr-nm { font-size: 11px; font-weight: 600; color: var(--navy); }
+.sc-hr-dt { font-size: 9px; color: var(--muted); }
+.sc-hr-nt { font-size: 9px; color: var(--soft); margin-top: 2px; font-style: italic; }
+
+/* calendar */
+.sc-cal-t { background: var(--orange); padding: 12px; }
+.sc-cal-m { font-family: 'Fraunces', serif; font-size: 13px; font-style: italic; color: white; margin-bottom: 7px; }
+.sc-cal-dh { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; margin-bottom: 3px; }
+.sc-cal-d { text-align: center; font-size: 8px; color: rgba(255,255,255,0.45); }
+.sc-cal-cells { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; }
+.sc-cal-c { text-align: center; font-size: 10px; padding: 4px 2px; border-radius: 5px; color: rgba(255,255,255,0.6); }
+.sc-cal-c.act { background: white; color: var(--orange2); font-weight: 700; border-radius: 7px; }
+.sc-cal-c.dot::after { content: '·'; display: block; font-size: 12px; color: rgba(255,255,255,0.5); margin-top: -6px; }
+.sc-cal-body { padding: 10px; background: var(--sand); }
+.sc-appt { background: white; border-radius: 9px; padding: 10px 12px; margin-bottom: 6px; border-left: 3px solid var(--orange); border: 1px solid var(--border); border-left: 3px solid var(--orange); }
+.sc-appt-n { font-size: 11px; font-weight: 600; color: var(--navy); }
+.sc-appt-t { font-size: 9px; color: var(--muted); margin-top: 2px; }
+
+/* find a vet */
+.sc-vet-t { background: var(--orange); padding: 12px; }
+.sc-vet-sb { background: white; border-radius: 9px; padding: 8px 12px; font-size: 10px; color: var(--muted); display: flex; gap: 6px; margin-bottom: 8px; }
+.sc-vet-chips { display: flex; gap: 5px; }
+.sc-vet-chip { background: rgba(255,255,255,0.15); border-radius: 99px; padding: 4px 10px; font-size: 9px; color: white; }
+.sc-vet-chip.a { background: white; color: var(--orange2); font-weight: 700; }
+.sc-vet-body { padding: 10px; background: var(--sand); }
+.sc-vet-c { background: white; border-radius: 10px; padding: 10px; margin-bottom: 6px; display: flex; gap: 8px; align-items: center; border: 1px solid var(--border); }
+.sc-vet-av { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg,var(--orange),#FF9A5C); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.sc-vet-nm { font-size: 11px; font-weight: 600; color: var(--navy); }
+.sc-vet-sp { font-size: 9px; color: var(--muted); }
+.sc-vet-rt { font-size: 9px; color: #F59E0B; }
+.sc-vet-ok { font-size: 8px; background: var(--orange-l); color: var(--orange2); padding: 2px 6px; border-radius: 99px; font-weight: 700; display: inline-block; margin-top: 2px; }
+.sc-vet-pr { font-family: 'Fraunces', serif; font-size: 14px; font-style: italic; color: var(--terra); margin-left: auto; }
+
+/* ── SOLUTION ── */
+.sol-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 48px; }
+.sol {
+  background: white; border: 1px solid var(--border); border-radius: 14px; padding: 28px;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.sol:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(196,113,74,0.1); border-color: rgba(196,113,74,0.3); }
+.sol-ic { font-size: 28px; margin-bottom: 14px; }
+.sol-t { font-family: 'Epilogue', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.sol-d { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+.res-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.res { background: var(--navy); border-radius: 14px; padding: 28px 18px; text-align: center; }
+.res-v { font-family: 'Fraunces', serif; font-size: 42px; font-weight: 500; font-style: italic; color: #E8A07A; line-height: 1; margin-bottom: 8px; }
+.res-l { font-size: 12px; color: rgba(250,250,247,0.5); line-height: 1.5; }
+
+/* ── REFLECTIONS ── */
+.refl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.refl { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+.refl-t { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; font-style: italic; color: var(--navy); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.refl-ic { font-size: 19px; }
+.refl-d { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+/* ── FOOTER ── */
+.cs-footer { background: var(--navy); padding: 80px 60px; text-align: center; }
+.cs-fl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(250,250,247,0.25); margin-bottom: 16px; }
+.cs-ft { font-family: 'Fraunces', serif; font-size: clamp(32px,4vw,50px); font-weight: 400; font-style: italic; color: rgba(250,250,247,0.92); margin-bottom: 28px; letter-spacing: -0.5px; }
+.cs-ft em { color: #E8A07A; font-style: normal; }
+.cs-flinks { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cs-fbtn { background: var(--terra); color: white; font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 13px; padding: 13px 28px; border-radius: 8px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+.cs-fbtn:hover { background: var(--terra2); transform: translateY(-2px); }
+.cs-fghost { border: 1px solid rgba(250,250,247,0.1); color: rgba(250,250,247,0.4); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.5px; padding: 13px 24px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+.cs-fghost:hover { border-color: rgba(196,113,74,0.4); color: #E8A07A; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  nav { padding: 0 16px; }
+  .nav-links .nav-link { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-r { min-height: 340px; }
+  .hero-l { padding: 48px 20px; }
+  .hero-float { display: none; }
+  .sec { padding: 64px 20px; }
+  .ov-grid { grid-template-columns: 1fr; }
+  .prob-grid, .per-grid, .refl-grid { grid-template-columns: 1fr 1fr; }
+  .res-grid, .sol-grid { grid-template-columns: 1fr; }
+  .sc3, .sc2 { grid-template-columns: 1fr; }
+  .tl { flex-direction: column; gap: 16px; }
+  .tl-s:not(:last-child)::after { display: none; }
+  .dec { grid-template-columns: 48px 1fr; gap: 16px; }
+  .res-row { grid-template-columns: 1fr 1fr; }
+  .em-grid { grid-template-columns: 1fr; }
+  .em-c:nth-child(2n) { border-right: 1px solid var(--border); }
+  .em-c:nth-child(3) { border-bottom: 1px solid var(--border); }
+  .cs-footer { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Alisa <span>Marin</span></a>
+  <div class="nav-links">
+    <a href="#overview" class="nav-link">Overview</a>
+    <a href="#screens" class="nav-link">Screens</a>
+    <a href="#reflections" class="nav-link">Reflections</a>
+    <a href="index.html" class="nav-back">← Portfolio</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-l">
+    <div class="hero-pill"><span class="pill-dot"></span>B2C · Mobile App · Healthcare</div>
+    <h1 class="h1"><span class="w1">Vet</span><span class="w2">Pet.</span></h1>
+    <p class="hero-desc">A veterinary care companion that helps <strong>pet owners manage everything</strong> — appointments, health records, vaccinations, and vet communication — in one calm, intuitive app.</p>
+    <div class="hero-meta">
+      <div class="hm"><div class="hm-n">10<span style="font-size:15px;">wk</span></div><div class="hm-l">Duration</div></div>
+      <div class="hm"><div class="hm-n">12</div><div class="hm-l">Users tested</div></div>
+      <div class="hm"><div class="hm-n">91%</div><div class="hm-l">Satisfaction</div></div>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">UX Research</span>
+      <span class="hero-tag">Personas</span>
+      <span class="hero-tag">UI Design</span>
+      <span class="hero-tag">iOS / Android</span>
+      <span class="hero-tag">Figma</span>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-float">
+      <div class="hf-l">Satisfaction</div>
+      <div class="hf-v">91%</div>
+      <div class="hf-s">Usability test score</div>
+    </div>
+    <div class="hero-phone">
+      <div class="phone-notch"><div class="phone-pill"></div></div>
+      <div class="phone-top"><div class="phone-logo">VetPet</div><div style="font-size:18px;">🐾</div></div>
+      <div class="phone-body">
+        <div class="phone-g">Good morning,</div>
+        <div class="phone-nm">Maria Ionescu</div>
+        <div class="phone-card">
+          <div class="phone-av">🐕</div>
+          <div><div class="phone-pn">Rex</div><div class="phone-ps">Golden Retriever · 3 yr</div><div class="phone-ok">✓ Up to date</div></div>
+        </div>
+        <div class="phone-appt">
+          <div class="phone-al">NEXT APPOINTMENT</div>
+          <div class="phone-an">Dr. Popescu · Annual Check</div>
+          <div class="phone-ad">📅 March 3 · 10:30 AM</div>
+        </div>
+        <div class="phone-grid">
+          <div class="phone-btn"><span>📋</span>Health</div>
+          <div class="phone-btn"><span>💊</span>Meds</div>
+          <div class="phone-btn"><span>🔔</span>Alerts</div>
+          <div class="phone-btn"><span>👩‍⚕️</span>Find Vet</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="sec" id="overview"><div class="wrap">
+  <div class="ov-grid reveal">
+    <div class="ov-text">
+      <div class="eyebrow"><span class="bar"></span>01 / Overview</div>
+      <h2 class="sh">Why <em>VetPet</em> needed to exist</h2>
+      <p>Pet owners face a <strong>fragmented, stressful experience</strong> managing their animal's health. Vaccination schedules, medical history, appointments — scattered across paper, WhatsApp messages, and multiple apps.</p>
+      <p>VetPet is a <strong>single, unified mobile companion</strong> centralising every aspect of a pet's healthcare journey. I led the full design process — from research through personas, IA, high-fidelity UI, and usability testing.</p>
+      <p>The core challenge: designing for <strong>two user types simultaneously</strong> — the emotionally-invested pet owner who wants simplicity and reassurance, and the vet professional who needs structured, reliable data.</p>
+      <div class="ov-tags">
+        <span class="ov-tag">UX Research</span>
+        <span class="ov-tag">Personas</span>
+        <span class="ov-tag">Information Architecture</span>
+        <span class="ov-tag plain">UI Design</span>
+        <span class="ov-tag plain">Prototyping</span>
+        <span class="ov-tag plain">Usability Testing</span>
+      </div>
+    </div>
+    <div class="ov-cards">
+      <div class="ov-card"><div class="ov-card-l">Role</div><div class="ov-card-v">Sole Product Designer<br><span style="font-size:12px;color:var(--muted);font-weight:400;">End-to-end: Research → Delivery</span></div></div>
+      <div class="ov-card"><div class="ov-card-l">Users Tested</div><div class="ov-card-big">12</div></div>
+      <div class="ov-card"><div class="ov-card-l">Platforms</div><div class="ov-card-v">iOS · Android</div></div>
+      <div class="ov-card"><div class="ov-card-l">Focus</div><div class="ov-card-v">Healthcare / B2C Mobile App</div></div>
+    </div>
+  </div>
+  <div class="tl reveal">
+    <div class="tl-s"><div class="tl-dot">1</div><div class="tl-name">Discovery</div><div class="tl-d">Audit, interviews, pain points</div></div>
+    <div class="tl-s"><div class="tl-dot">2</div><div class="tl-name">Research</div><div class="tl-d">Personas, empathy maps, journeys</div></div>
+    <div class="tl-s"><div class="tl-dot">3</div><div class="tl-name">Architecture</div><div class="tl-d">IA, flows, navigation</div></div>
+    <div class="tl-s"><div class="tl-dot">4</div><div class="tl-name">Design</div><div class="tl-d">Design system, hi-fi screens</div></div>
+    <div class="tl-s"><div class="tl-dot">5</div><div class="tl-name">Testing</div><div class="tl-d">Usability sessions, iteration</div></div>
+  </div>
+</div></section>
+
+<!-- PROBLEM -->
+<section class="sec alt" id="problem"><div class="wrap">
+  <div class="eyebrow reveal"><span class="bar"></span>02 / Problem</div>
+  <h2 class="sh reveal">What was <em>broken?</em></h2>
+  <div class="bq reveal">
+    <p>"Pet owners lose track of their pet's health history. Vets can't access reliable records at appointments. The result? Repeated tests, missed vaccinations, and a lot of preventable stress."</p>
+    <cite>— Synthesised from 8 user interviews</cite>
+  </div>
+  <div class="prob-grid reveal">
+    <div class="prob-c"><div class="prob-n">01</div><div class="prob-t">Fragmented health records</div><div class="prob-d">Medical history scattered across paper, photos, WhatsApp, and multiple apps — no single reliable source of truth.</div></div>
+    <div class="prob-c"><div class="prob-n">02</div><div class="prob-t">Appointment friction</div><div class="prob-d">Booking requires phone calls during business hours, leading to missed appointments and zero automated reminders.</div></div>
+    <div class="prob-c"><div class="prob-n">03</div><div class="prob-t">Vaccination confusion</div><div class="prob-d">Owners miss deadlines because reminders don't exist or are buried in paper records they rarely check.</div></div>
+    <div class="prob-c"><div class="prob-n">04</div><div class="prob-t">No vet communication</div><div class="prob-d">Between appointments, no reliable channel to ask questions or share symptom photos with a trusted professional.</div></div>
+    <div class="prob-c"><div class="prob-n">05</div><div class="prob-t">Multi-pet chaos</div><div class="prob-d">Households with multiple pets juggle entirely separate records with no consolidated overview.</div></div>
+    <div class="prob-c"><div class="prob-n">06</div><div class="prob-t">Emotional anxiety loop</div><div class="prob-d">Managing pet health provokes anxiety — no app was designed with this emotional state at its core.</div></div>
+  </div>
+</div></section>
+
+<!-- RESEARCH -->
+<section class="sec" id="research"><div class="wrap">
+  <div class="eyebrow reveal"><span class="bar"></span>03 / Research</div>
+  <h2 class="sh reveal"><em>Listening</em> first</h2>
+  <p class="sub reveal">8 interviews with pet owners + 4 sessions with veterinarians. Goal: uncover real workflows, not assumed ones.</p>
+  <div class="res-grid reveal">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">Interview Questions</div>
+      <ul class="iq">
+        <li>How do you currently track your pet's vaccinations and medical history?</li>
+        <li>Tell me about the last time you needed a specific vet record quickly. What happened?</li>
+        <li>How do you book vet appointments? What frustrates you most?</li>
+        <li>If your pet showed a worrying symptom between visits, what would you do?</li>
+        <li>How do you manage reminders for medications or check-ups?</li>
+        <li>What does "peace of mind" about your pet's health look like for you?</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">Key Insights</div>
+      <div class="ins-list">
+        <div class="ins"><div class="ins-ic">📂</div><div><div class="ins-t">Records live in 4+ places</div><div class="ins-d">Every pet owner used 3–4 methods to store health info. None felt the data was complete or reliable.</div></div></div>
+        <div class="ins"><div class="ins-ic">😰</div><div><div class="ins-t">Anxiety drives engagement</div><div class="ins-d">Users open health apps when worried. The design needed calming, actionable information visible immediately.</div></div></div>
+        <div class="ins"><div class="ins-ic">🔔</div><div><div class="ins-t">Reminders are #1 requested</div><div class="ins-d">85% had missed a vaccination or dose due to lack of automated reminders. It was the top unmet need.</div></div></div>
+        <div class="ins"><div class="ins-ic">🤝</div><div><div class="ins-t">Trust requires transparency</div><div class="ins-d">Vets wanted detailed records. Owners wanted plain-language summaries. A core design tension to navigate.</div></div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PERSONAS -->
+<section class="sec alt" id="personas"><div class="wrap">
+  <div class="eyebrow reveal"><span class="bar"></span>04 / Personas</div>
+  <h2 class="sh reveal">Who we're <em>designing for</em></h2>
+  <div class="per-grid reveal">
+    <div class="per">
+      <div class="per-head"><div class="per-av">👩</div><div class="per-name">Maria Ionescu</div><div class="per-role">First-time pet owner · 28 · Marketing Manager</div></div>
+      <div class="per-body">
+        <div class="ps"><div class="ps-l">About</div><div class="ps-t">Recently adopted her first dog. Tech-savvy but overwhelmed by care decisions. Relies on Google and Instagram vets for answers.</div></div>
+        <div class="ps"><div class="ps-l">Goals</div><ul class="ps-ul"><li><span class="ok">✓</span>Know Rex's vaccination schedule with certainty</li><li><span class="ok">✓</span>Find a trusted vet without endless searching</li><li><span class="ok">✓</span>Get reassurance that she's doing everything right</li></ul></div>
+        <div class="ps"><div class="ps-l">Frustrations</div><ul class="ps-ul"><li><span class="no">✕</span>Vaccination booklet always at home during vet visits</li><li><span class="no">✕</span>Can't remember which deworming product she used</li><li><span class="no">✕</span>No way to quickly send a symptom photo for advice</li></ul></div>
+        <div class="ps"><div class="ps-l">Behaviours</div><div class="ps-tags"><span class="ps-tag">Mobile-first</span><span class="ps-tag">Anxious searcher</span><span class="ps-tag">Loves reminders</span></div></div>
+      </div>
+    </div>
+    <div class="per">
+      <div class="per-head"><div class="per-av">👨</div><div class="per-name">Andrei Moldovan</div><div class="per-role">Multi-pet household · 42 · Software Engineer</div></div>
+      <div class="per-body">
+        <div class="ps"><div class="ps-l">About</div><div class="ps-t">Has 2 dogs and a cat. Very organised — keeps spreadsheets for everything. Frustrated that no app handles multiple pets well.</div></div>
+        <div class="ps"><div class="ps-l">Goals</div><ul class="ps-ul"><li><span class="ok">✓</span>One consolidated dashboard for all three pets</li><li><span class="ok">✓</span>Smart, non-intrusive notifications per pet</li><li><span class="ok">✓</span>Export records as a PDF to share with vets</li></ul></div>
+        <div class="ps"><div class="ps-l">Frustrations</div><ul class="ps-ul"><li><span class="no">✕</span>Every app only handles one pet profile well</li><li><span class="no">✕</span>Can't tell which dog had which treatment</li><li><span class="no">✕</span>No data import — always forced to start from scratch</li></ul></div>
+        <div class="ps"><div class="ps-l">Behaviours</div><div class="ps-tags"><span class="ps-tag">Power user</span><span class="ps-tag">Data-driven</span><span class="ps-tag">Early adopter</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="em-grid reveal">
+    <div class="em-c"><div class="em-h">💬 Says</div><ul class="em-ul"><li>"I just want to know if this is normal or if I should worry"</li><li>"Where did I put that vaccination booklet again?"</li><li>"My vet only works mornings and I can never get through"</li></ul></div>
+    <div class="em-c"><div class="em-h">🧠 Thinks</div><ul class="em-ul"><li>Am I being a good enough pet owner?</li><li>What if I'm missing something important?</li><li>There must be an easier way to manage all of this</li></ul></div>
+    <div class="em-c"><div class="em-h">👆 Does</div><ul class="em-ul"><li>Googles symptoms at 11pm with increasing anxiety</li><li>Takes photos of every document "just in case"</li><li>Asks vet friends on WhatsApp for quick reassurance</li></ul></div>
+    <div class="em-c"><div class="em-h">❤️ Feels</div><ul class="em-ul"><li>Overwhelmed by the responsibility of pet healthcare</li><li>Guilty when she misses a dose or appointment</li><li>Relieved when she gets a clear, actionable answer</li></ul></div>
+  </div>
+</div></section>
+
+<!-- DECISIONS -->
+<section class="sec" id="decisions"><div class="wrap">
+  <div class="eyebrow reveal"><span class="bar"></span>05 / Design Decisions</div>
+  <h2 class="sh reveal">Why I chose <em>what I chose</em></h2>
+  <div class="dec-list">
+    <div class="dec reveal"><div class="dec-n">1</div><div><div class="dec-t">Persistent bottom nav — not a hamburger</div><div class="dec-d">Mobile users in healthcare contexts are often anxious and one-handed. Persistent bottom navigation gives immediate access to core actions without cognitive overhead or hidden menus.</div><span class="dec-badge">Mobile UX Principle</span></div></div>
+    <div class="dec reveal"><div class="dec-n">2</div><div><div class="dec-t">Orange accent — warm, energetic, not clinical</div><div class="dec-d">Orange conveys warmth, energy and approachability — what a pet owner needs when worried about their animal. Unlike clinical blue, it feels companion-like. The warm off-white (#FFF8F3) background reinforces this calming, non-medical atmosphere.</div><span class="dec-badge">Colour Psychology · Brand</span></div></div>
+    <div class="dec reveal"><div class="dec-n">3</div><div><div class="dec-t">Pet profile as health dashboard, not a contact card</div><div class="dec-d">Users felt most reassured when they could see their pet's entire status at a glance — vaccinations current, next appointment visible, zero active alerts. The profile screen became the most loved screen in all testing sessions.</div><span class="dec-badge">IA · Emotional Design</span></div></div>
+    <div class="dec reveal"><div class="dec-n">4</div><div><div class="dec-t">3-tier reminder system with per-pet controls</div><div class="dec-d">To combat notification fatigue: informational (orange), advisory (amber), urgent (red). Users can customise urgency per pet. This design decision was estimated to reduce notification dismissal rates by 60% vs a flat system.</div><span class="dec-badge">Notification Design · User Control</span></div></div>
+    <div class="dec reveal"><div class="dec-n">5</div><div><div class="dec-t">Shareable PDF export — the bridge between users</div><div class="dec-d">Owners needed warmth; vets needed structured data. Rather than forcing one UI to serve both, a clean one-tap PDF export satisfied vets completely and gave owners a way to feel prepared for every appointment.</div><span class="dec-badge">Cross-User Solution · IA</span></div></div>
+  </div>
+</div></section>
+
+<!-- SCREENS -->
+<section class="sec alt" id="screens"><div class="wrap">
+  <div class="eyebrow reveal"><span class="bar"></span>06 / High-Fidelity Screens</div>
+  <h2 class="sh reveal">The <em>product</em></h2>
+  <p class="sub reveal">Custom component library — 60+ components, 5 colour states, full accessibility annotations. Built in Figma.</p>
+
+  <div class="sg reveal">
+    <div class="sg-head"><div class="sg-n">1</div><div class="sg-t">Onboarding & Home Dashboard</div><div class="sg-s">Auth · Core</div></div>
+    <div class="sc3">
+      <div><div class="sc-l">Welcome Screen</div><div class="pf"><div class="pf-bar"><div class="pf-t">VetPet</div><div class="pf-ti">9:41</div></div><div class="sc-wb"><div class="sc-wl">VetPet</div><div class="sc-ws">Your pet's health, simplified</div><div class="sc-wi">🐾</div><div class="sc-wt">Care starts here.</div><div class="sc-wd">Track vaccinations, book appointments, stay connected with your vet.</div><div class="sc-wb-btn">Get Started</div><div class="sc-wb-link">Already have an account? Sign in</div></div></div></div>
+      <div><div class="sc-l">Home Dashboard</div><div class="pf"><div class="pf-bar"><div class="pf-t">Home</div><div class="pf-ti">9:41</div></div><div class="sc-home"><div class="sc-top"><div class="sc-greet">Good morning 👋</div><div class="sc-nm">Maria Ionescu</div><div class="sc-sts"><div class="sc-st"><div class="sc-sv">2</div><div class="sc-sl">Pets</div></div><div class="sc-st"><div class="sc-sv">1</div><div class="sc-sl">Appt</div></div><div class="sc-st"><div class="sc-sv">0</div><div class="sc-sl">Alerts</div></div></div></div><div class="sc-sec">My Pets</div><div class="sc-pet"><div class="sc-av" style="background:linear-gradient(135deg,#FF6B1A,#FF9A5C);">🐕</div><div><div class="sc-pn">Rex</div><div class="sc-ps">Golden Retriever · 3 yr</div><div class="badge-ok">✓ Up to date</div></div></div><div class="sc-pet"><div class="sc-av" style="background:linear-gradient(135deg,#FF9A5C,#FFB347);">🐈</div><div><div class="sc-pn">Luna</div><div class="sc-ps">Persian Cat · 5 yr</div><div class="badge-warn">⚠ Deworming due</div></div></div></div></div></div>
+      <div><div class="sc-l">Notifications</div><div class="pf"><div class="pf-bar"><div class="pf-t">Alerts</div><div class="pf-ti">9:41</div></div><div class="sc-nb"><div class="sc-nt-title">Notifications</div><div class="sc-nt pri"><div class="sc-nt-ic" style="background:var(--orange-l);">💊</div><div><div class="sc-nt-nm">Luna — Deworming Due</div><div class="sc-nt-d">Quarterly treatment due in 3 days.</div><div class="sc-nt-time">2 hours ago</div></div></div><div class="sc-nt"><div class="sc-nt-ic" style="background:#DCFCE7;">📅</div><div><div class="sc-nt-nm">Appointment Tomorrow</div><div class="sc-nt-d">Rex · Annual check-up · 10:30 AM</div><div class="sc-nt-time">Yesterday</div></div></div><div class="sc-nt"><div class="sc-nt-ic" style="background:var(--sand2);">✅</div><div><div class="sc-nt-nm">Vaccination Updated</div><div class="sc-nt-d">Rex's Rabies vaccine recorded.</div><div class="sc-nt-time">3 days ago</div></div></div></div></div></div>
+    </div>
+  </div>
+
+  <div class="sg reveal">
+    <div class="sg-head"><div class="sg-n">2</div><div class="sg-t">Pet Profile & Health Records</div><div class="sg-s">Pet Management</div></div>
+    <div class="sc3">
+      <div><div class="sc-l">Pet Profile</div><div class="pf"><div class="pf-bar"><div class="pf-t">Rex</div><div class="pf-ti">9:41</div></div><div class="sc-pt"><div class="sc-pav">🐕</div><div class="sc-pnm">Rex</div><div class="sc-pbr">Golden Retriever · Male · 3 yr</div><div class="sc-pst"><div class="sc-psc"><div class="sc-psv">28kg</div><div class="sc-psl">Weight</div></div><div class="sc-psc"><div class="sc-psv">3yr</div><div class="sc-psl">Age</div></div><div class="sc-psc"><div class="sc-psv">✓</div><div class="sc-psl">Status</div></div></div></div><div class="sc-pb"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;">Vaccinations</div><div class="vax-row"><div><div class="vax-n">Rabies</div><div class="vax-d">March 2024</div></div><div class="badge-ok">✓ Valid</div></div><div class="vax-row"><div><div class="vax-n">DHPP</div><div class="vax-d">January 2024</div></div><div class="badge-ok">✓ Valid</div></div><div class="vax-row"><div><div class="vax-n">Leptospirosis</div><div class="vax-d">Due Apr 2026</div></div><div style="font-size:8px;background:#DBEAFE;color:#1D4ED8;padding:2px 6px;border-radius:99px;font-weight:700;">Upcoming</div></div></div></div></div>
+      <div><div class="sc-l">Health Records</div><div class="pf"><div class="pf-bar"><div class="pf-t">Health Records</div><div class="pf-ti">9:41</div></div><div class="sc-hr-sb"><div class="sc-hr-inp">🔍 Search records…</div></div><div class="sc-hr-body"><div class="sc-hr-s">Recent Visits</div><div class="sc-hr-i"><div class="sc-hr-ic">🏥</div><div><div style="display:flex;justify-content:space-between;"><div class="sc-hr-nm">Annual Check-up</div><div class="badge-ok">All clear</div></div><div class="sc-hr-dt">Dr. Popescu · Feb 2025</div><div class="sc-hr-nt">Weight stable. Teeth cleaning recommended.</div></div></div><div class="sc-hr-i"><div class="sc-hr-ic">💉</div><div><div style="display:flex;justify-content:space-between;"><div class="sc-hr-nm">Rabies Vaccination</div><div class="badge-ok">Done</div></div><div class="sc-hr-dt">Dr. Popescu · Mar 2024</div></div></div><div class="sc-hr-s">Medications</div><div class="sc-hr-i"><div class="sc-hr-ic">💊</div><div><div style="display:flex;justify-content:space-between;"><div class="sc-hr-nm">Flea & Tick Prevention</div><div class="badge-warn">Due soon</div></div><div class="sc-hr-dt">Monthly · Next: Mar 10</div></div></div></div></div></div>
+      <div><div class="sc-l">Add a Pet</div><div class="pf"><div class="pf-bar"><div class="pf-t">Add a Pet</div><div class="pf-ti">9:41</div></div><div style="padding:14px;background:var(--sand);"><div style="text-align:center;padding:12px 0;"><div style="width:56px;height:56px;background:var(--terra-l);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 8px;">🐾</div><div style="font-size:10px;color:var(--muted);">Choose pet type</div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px;"><div style="background:var(--orange);border-radius:12px;padding:12px;text-align:center;font-size:20px;">🐕</div><div style="background:white;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;font-size:20px;">🐈</div><div style="background:white;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;font-size:20px;">🐇</div></div><div style="background:white;border-radius:10px;padding:10px;margin-bottom:6px;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);margin-bottom:3px;">Pet name</div><div style="font-size:13px;font-weight:600;color:var(--navy);">Buddy</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;"><div style="background:white;border-radius:10px;padding:10px;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);margin-bottom:3px;">Breed</div><div style="font-size:12px;font-weight:600;color:var(--navy);">Labrador</div></div><div style="background:white;border-radius:10px;padding:10px;border:1px solid var(--border);"><div style="font-size:9px;color:var(--muted);margin-bottom:3px;">Birth date</div><div style="font-size:12px;font-weight:600;color:var(--navy);">12 Mar 2021</div></div></div><div style="background:var(--orange);color:white;border-radius:10px;padding:11px;text-align:center;font-family:'Fraunces',serif;font-style:italic;font-size:13px;">Continue →</div></div></div></div>
+    </div>
+  </div>
+
+  <div class="sg reveal">
+    <div class="sg-head"><div class="sg-n">3</div><div class="sg-t">Appointments & Vet Discovery</div><div class="sg-s">Scheduling</div></div>
+    <div class="sc2">
+      <div><div class="sc-l">Appointments Calendar</div><div class="pf"><div class="pf-bar"><div class="pf-t">Appointments</div><div class="pf-ti">9:41</div></div><div class="sc-cal-t"><div class="sc-cal-m">March 2026</div><div class="sc-cal-dh"><div class="sc-cal-d">Mo</div><div class="sc-cal-d">Tu</div><div class="sc-cal-d">We</div><div class="sc-cal-d">Th</div><div class="sc-cal-d">Fr</div><div class="sc-cal-d">Sa</div><div class="sc-cal-d">Su</div></div><div class="sc-cal-cells"><div class="sc-cal-c"></div><div class="sc-cal-c"></div><div class="sc-cal-c">1</div><div class="sc-cal-c act">2</div><div class="sc-cal-c dot">3</div><div class="sc-cal-c">4</div><div class="sc-cal-c">5</div><div class="sc-cal-c">6</div><div class="sc-cal-c">7</div><div class="sc-cal-c">8</div><div class="sc-cal-c">9</div><div class="sc-cal-c dot">10</div><div class="sc-cal-c">11</div><div class="sc-cal-c">12</div></div></div><div class="sc-cal-body"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">March 3</div><div class="sc-appt"><div style="display:flex;justify-content:space-between;"><div class="sc-appt-n">Rex — Annual Check-up</div><div style="font-size:9px;color:var(--orange);">Routine</div></div><div class="sc-appt-t">📍 Dr. Popescu · 10:30 AM</div></div><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin:8px 0 6px;">March 10</div><div class="sc-appt" style="border-left-color:#F59E0B;"><div style="display:flex;justify-content:space-between;"><div class="sc-appt-n">Luna — Deworming</div><div style="font-size:9px;color:#F59E0B;">Treatment</div></div><div class="sc-appt-t">📍 Dr. Ionuț · 14:00</div></div><div style="background:var(--orange);color:white;border-radius:9px;padding:10px;text-align:center;font-family:'Fraunces',serif;font-style:italic;font-size:12px;margin-top:10px;">+ Book Appointment</div></div></div></div>
+      <div><div class="sc-l">Find a Vet</div><div class="pf"><div class="pf-bar"><div class="pf-t">Find a Vet</div><div class="pf-ti">9:41</div></div><div class="sc-vet-t"><div class="sc-vet-sb">🔍 Search by name or specialty…</div><div class="sc-vet-chips"><span class="sc-vet-chip a">All</span><span class="sc-vet-chip">Dogs</span><span class="sc-vet-chip">Cats</span><span class="sc-vet-chip">Near me</span></div></div><div class="sc-vet-body"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">3 vets nearby</div><div class="sc-vet-c"><div class="sc-vet-av">👩‍⚕️</div><div style="flex:1;"><div class="sc-vet-nm">Dr. Ioana Popescu</div><div class="sc-vet-sp">General · Dentistry</div><div class="sc-vet-rt">★★★★★ 4.9 (68)</div><div class="sc-vet-ok">✓ Available Monday</div></div><div class="sc-vet-pr">120 RON</div></div><div class="sc-vet-c"><div class="sc-vet-av" style="background:linear-gradient(135deg,#4CAF50,#81C784);">👨‍⚕️</div><div style="flex:1;"><div class="sc-vet-nm">Dr. Mihai Ionuț</div><div class="sc-vet-sp">Surgery · Orthopedics</div><div class="sc-vet-rt">★★★★½ 4.7 (43)</div><div style="font-size:8px;background:#FEF9C3;color:#854D0E;padding:2px 6px;border-radius:99px;font-weight:700;display:inline-block;margin-top:2px;">Next: Wednesday</div></div><div class="sc-vet-pr">150 RON</div></div><div class="sc-vet-c"><div class="sc-vet-av" style="background:linear-gradient(135deg,#9C27B0,#CE93D8);">👩‍⚕️</div><div style="flex:1;"><div class="sc-vet-nm">Dr. Ana Muntean</div><div class="sc-vet-sp">Cats · Exotics</div><div class="sc-vet-rt">★★★★★ 5.0 (22)</div><div class="sc-vet-ok">✓ Available Today</div></div><div class="sc-vet-pr">110 RON</div></div></div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SOLUTION -->
+<section class="sec" id="solution"><div class="wrap">
+  <div class="eyebrow reveal"><span class="bar"></span>07 / Solution</div>
+  <h2 class="sh reveal">What VetPet <em>delivers</em></h2>
+  <div class="sol-grid reveal">
+    <div class="sol"><div class="sol-ic">📋</div><div class="sol-t">Centralised Health Records</div><div class="sol-d">All vaccinations, treatments, and vet visits in one searchable timeline — always up to date and shareable.</div></div>
+    <div class="sol"><div class="sol-ic">📅</div><div class="sol-t">Frictionless Appointment Booking</div><div class="sol-d">Browse verified vets by specialty and availability. Book in 3 taps with automatic calendar reminders.</div></div>
+    <div class="sol"><div class="sol-ic">🔔</div><div class="sol-t">Tiered Smart Reminders</div><div class="sol-d">Proactive notifications prioritised by urgency, fully customisable per pet. Zero notification fatigue.</div></div>
+    <div class="sol"><div class="sol-ic">💬</div><div class="sol-t">Direct Vet Messaging</div><div class="sol-d">Send photos and updates between visits — reducing anxiety and cutting unnecessary appointments.</div></div>
+    <div class="sol"><div class="sol-ic">🐾</div><div class="sol-t">Multi-Pet Dashboard</div><div class="sol-d">One unified view for households with multiple pets — individual profiles, one consolidated alert feed.</div></div>
+    <div class="sol"><div class="sol-ic">📤</div><div class="sol-t">One-Tap PDF Export</div><div class="sol-d">Generate a clean health summary — share with a new vet or boarding facility in seconds.</div></div>
+  </div>
+  <div class="res-row reveal">
+    <div class="res"><div class="res-v">91%</div><div class="res-l">Usability satisfaction across 12 participants</div></div>
+    <div class="res"><div class="res-v">3↓</div><div class="res-l">Taps to book an appointment</div></div>
+    <div class="res"><div class="res-v">100%</div><div class="res-l">Found vaccination status in under 8 seconds</div></div>
+    <div class="res"><div class="res-v">0</div><div class="res-l">Critical errors in the final testing round</div></div>
+  </div>
+</div></section>
+
+<!-- REFLECTIONS -->
+<section class="sec alt" id="reflections"><div class="wrap">
+  <div class="eyebrow reveal"><span class="bar"></span>08 / Reflections</div>
+  <h2 class="sh reveal">What I <em>learned</em></h2>
+  <div class="refl-grid reveal">
+    <div class="refl"><div class="refl-t"><span class="refl-ic">💡</span>Emotional context shapes everything</div><div class="refl-d">Pet owners open this app during anxious moments. This shaped every decision — colour, hierarchy, loading states, empty states. Designing for emotion requires genuine empathy, not just research.</div></div>
+    <div class="refl"><div class="refl-t"><span class="refl-ic">🧪</span>Test earlier, test more</div><div class="refl-d">My initial IA placed health records under a "documents" metaphor — which tested poorly. Users expected a timeline. Earlier wireframe testing would have saved a full redesign cycle.</div></div>
+    <div class="refl"><div class="refl-t"><span class="refl-ic">⚖️</span>Balancing two user types</div><div class="refl-d">Owners wanted warmth; vets wanted structure. The PDF export was the breakthrough — it satisfied both without forcing a UI compromise or diluting either experience.</div></div>
+    <div class="refl"><div class="refl-t"><span class="refl-ic">🔄</span>What I'd do differently</div><div class="refl-d">I'd invest more in the vet-facing experience. A fully realised product needs a separate vet portal with its own design language — a natural phase 2 I'd love to explore.</div></div>
+  </div>
+</div></section>
+
+<div class="cs-footer">
+  <div class="cs-fl">Continue Exploring</div>
+  <h2 class="cs-ft">See more <em>work</em></h2>
+  <div class="cs-flinks">
+    <a href="kleanfleet-case-study.html" class="cs-fbtn">← KleanFleet Case Study</a>
+    <a href="index.html" class="cs-fghost">Back to Portfolio</a>
+    <a href="mailto:marinalisa2305@gmail.com" class="cs-fghost">Get in Touch</a>
+  </div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
